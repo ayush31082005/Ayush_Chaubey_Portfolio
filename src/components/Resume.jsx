@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
 import { personalInfo } from "../data/portfolioData";
 import { FaDownload, FaExternalLinkAlt, FaFileAlt } from "react-icons/fa";
 
-export default function Resume() {
-  const resumeUrl =
-    typeof window === "undefined"
-      ? personalInfo.resume
-      : new URL(personalInfo.resume, window.location.origin).href;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
-  const mobilePreviewUrl = `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeUrl)}`;
+export default function Resume() {
+  const [numPages, setNumPages] = useState(0);
+  const [mobileWidth, setMobileWidth] = useState(320);
+  const [hasMobilePreviewError, setHasMobilePreviewError] = useState(false);
+
+  useEffect(() => {
+    const updateMobileWidth = () => {
+      const nextWidth = Math.min(Math.max(window.innerWidth - 64, 260), 720);
+      setMobileWidth(nextWidth);
+    };
+
+    updateMobileWidth();
+    window.addEventListener("resize", updateMobileWidth);
+
+    return () => window.removeEventListener("resize", updateMobileWidth);
+  }, []);
 
   return (
     <section id="resume" className="px-5 py-10 md:py-12 bg-[#151e2e]">
@@ -41,16 +57,40 @@ export default function Resume() {
               <FaFileAlt className="text-2xl" />
               <div>
                 <h3 className="text-lg font-black text-white">Resume Preview</h3>
-                <p className="text-sm text-slate-400">Mobile-friendly document viewer</p>
+                <p className="text-sm text-slate-400">Mobile-friendly PDF preview</p>
               </div>
             </div>
 
-            <iframe
-              src={mobilePreviewUrl}
-              title="Ayush resume mobile preview"
-              loading="lazy"
-              className="h-[540px] w-full bg-white"
-            />
+            <div className="bg-slate-950 px-2 py-4">
+              {hasMobilePreviewError ? (
+                <div className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-10 text-center text-slate-300">
+                  PDF preview yahan load nahi ho paaya. Neeche diye gaye buttons se resume khol ya download kar sakte ho.
+                </div>
+              ) : (
+                <Document
+                  file={personalInfo.resume}
+                  loading={<div className="py-10 text-center text-slate-300">Resume load ho raha hai...</div>}
+                  onLoadSuccess={({ numPages: totalPages }) => {
+                    setNumPages(totalPages);
+                    setHasMobilePreviewError(false);
+                  }}
+                  onLoadError={() => setHasMobilePreviewError(true)}
+                >
+                  <div className="flex flex-col items-center gap-4">
+                    {Array.from({ length: numPages }, (_, index) => (
+                      <Page
+                        key={index + 1}
+                        pageNumber={index + 1}
+                        width={mobileWidth}
+                        renderAnnotationLayer={false}
+                        renderTextLayer={false}
+                        className="overflow-hidden rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.45)]"
+                      />
+                    ))}
+                  </div>
+                </Document>
+              )}
+            </div>
 
             <div className="flex flex-col gap-3 p-4">
               <a

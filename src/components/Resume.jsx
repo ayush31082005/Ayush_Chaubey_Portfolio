@@ -7,7 +7,10 @@ import {
   skills,
   summary,
 } from "../data/portfolioData";
-import { FaDownload, FaExternalLinkAlt, FaFileAlt } from "react-icons/fa";
+import { FaDownload, FaExternalLinkAlt, FaFileAlt, FaGithub, FaGlobe } from "react-icons/fa";
+
+const emailLink = `mailto:${personalInfo.email}`;
+const phoneLink = `tel:${personalInfo.phone}`;
 
 export default function Resume() {
   return (
@@ -18,8 +21,7 @@ export default function Resume() {
           My <span className="gradient-text">Resume</span>
         </h2>
         <p className="section-subtitle mx-auto mt-2">
-          Resume preview paper-style layout me hai. Andar scroll hoga aur content
-          poora visible rahega.
+          Resume preview screenshot-jaisa paper layout me hai, aur andar ke links bhi clickable hain.
         </p>
 
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
@@ -41,156 +43,156 @@ export default function Resume() {
         </div>
 
         <div className="mx-auto mt-8 max-w-5xl rounded-[2rem] border border-slate-700 bg-slate-950/45 p-3 shadow-[0_20px_80px_rgba(2,12,27,0.35)]">
-          <div className="rounded-[1.5rem] border border-slate-200 bg-[#f6f8fc] p-2">
-            <div className="resume-scroll h-[72vh] overflow-y-auto rounded-[1.25rem] bg-white text-left text-slate-900 md:h-[82vh]">
-              <div className="grid md:grid-cols-[280px_minmax(0,1fr)]">
-                <aside className="border-b border-slate-200 bg-[#eaf2fb] p-5 md:min-h-full md:border-b-0 md:border-r md:border-slate-200 md:p-6">
-                  <div className="border-b border-slate-300 pb-5">
-                    <p className="text-xs font-black uppercase tracking-[0.35em] text-cyan-700">
-                      Resume
-                    </p>
-                    <h3 className="mt-3 text-3xl font-black leading-tight text-slate-950">
-                      {personalInfo.name}
-                    </h3>
-                    <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-slate-600">
-                      {personalInfo.headline}
-                    </p>
+          <div className="rounded-[1.5rem] bg-[#dfe8f5] p-3">
+            <div className="resume-scroll h-[74vh] overflow-y-auto rounded-[1.25rem] bg-white text-left text-slate-900 md:h-[84vh]">
+              <div className="overflow-hidden rounded-[1.25rem] border border-slate-200">
+                <div className="relative overflow-hidden bg-[#18315d] px-5 py-6 text-white sm:px-8">
+                  <div className="absolute -left-10 top-8 h-28 w-28 rounded-full bg-cyan-400/10" />
+                  <div className="absolute -right-8 -top-8 h-36 w-36 rounded-full bg-blue-300/10" />
+                  <div className="absolute right-14 top-6 h-20 w-20 rounded-full bg-cyan-300/10" />
+
+                  <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <h3 className="text-3xl font-black leading-tight sm:text-4xl">
+                        {personalInfo.name}
+                      </h3>
+                      <p className="mt-2 text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
+                        {personalInfo.headline}
+                      </p>
+                    </div>
+
+                    <div className="grid gap-1 text-sm text-slate-100 sm:grid-cols-2 sm:gap-x-6">
+                      <ResumeHeaderLink href={phoneLink}>{personalInfo.phone}</ResumeHeaderLink>
+                      <ResumeHeaderLink href={emailLink}>{personalInfo.email}</ResumeHeaderLink>
+                      <ResumeHeaderLink href={personalInfo.github} external>
+                        GitHub Profile
+                      </ResumeHeaderLink>
+                      <ResumeHeaderLink href={personalInfo.linkedin} external>
+                        LinkedIn Profile
+                      </ResumeHeaderLink>
+                    </div>
                   </div>
+                </div>
 
-                  <ResumeSidebarSection title="Contact">
-                    <SidebarLine>{personalInfo.email}</SidebarLine>
-                    <SidebarLine>{personalInfo.phone}</SidebarLine>
-                    <SidebarLine>GitHub: ayush31082005</SidebarLine>
-                    <SidebarLine>LinkedIn: ayush-chaubey-37237a39b</SidebarLine>
-                  </ResumeSidebarSection>
+                <div className="grid md:grid-cols-[255px_minmax(0,1fr)]">
+                  <aside className="border-b border-slate-200 bg-[#f4f8fd] p-4 md:border-b-0 md:border-r md:p-5">
+                    <ResumeSidebarSection title="Technical Skills">
+                      {Object.entries(skills).map(([category, items]) => (
+                        <div key={category}>
+                          <h4 className="text-[11px] font-black uppercase tracking-[0.28em] text-cyan-700">
+                            {category}
+                          </h4>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {items.map((item) => (
+                              <span
+                                key={item}
+                                className="rounded-full border border-cyan-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+                              >
+                                {item}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </ResumeSidebarSection>
 
-                  <ResumeSidebarSection title="Skills">
-                    {Object.entries(skills).map(([category, items]) => (
-                      <div key={category} className="rounded-2xl bg-white/80 p-3">
-                        <h4 className="text-xs font-black uppercase tracking-[0.28em] text-cyan-700">
-                          {category}
-                        </h4>
-                        <p className="mt-2 text-sm leading-6 text-slate-700">
-                          {items.join(", ")}
-                        </p>
+                    <ResumeSidebarSection title="Education">
+                      <div className="space-y-4">
+                        {education.map((item) => (
+                          <div key={`${item.degree}-${item.institute}`}>
+                            <h4 className="text-sm font-black text-slate-900">{item.degree}</h4>
+                            <p className="mt-1 text-xs font-semibold text-cyan-700">{item.institute}</p>
+                            <p className="text-xs leading-5 text-slate-600">{item.board}</p>
+                            <p className="mt-1 text-[11px] font-bold text-slate-500">{item.duration}</p>
+                            {item.status ? (
+                              <p className="text-[11px] font-bold text-slate-500">{item.status}</p>
+                            ) : null}
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </ResumeSidebarSection>
+                    </ResumeSidebarSection>
 
-                  <ResumeSidebarSection title="Certifications">
-                    <ul className="space-y-2">
-                      {certifications.map((certification) => (
-                        <li
-                          key={certification}
-                          className="rounded-2xl bg-white/80 px-3 py-2 text-sm leading-6 text-slate-700"
-                        >
-                          {certification}
-                        </li>
-                      ))}
-                    </ul>
-                  </ResumeSidebarSection>
-                </aside>
+                    <ResumeSidebarSection title="Certifications">
+                      <ol className="space-y-2 pl-4">
+                        {certifications.map((certification) => (
+                          <li key={certification} className="text-xs leading-5 text-slate-700">
+                            {certification}
+                          </li>
+                        ))}
+                      </ol>
+                    </ResumeSidebarSection>
+                  </aside>
 
-                <div className="p-5 sm:p-6 md:p-8">
-                  <ResumeMainSection title="Professional Summary">
-                    <p className="text-sm leading-7 text-slate-700 sm:text-[15px]">
-                      {summary}
-                    </p>
-                  </ResumeMainSection>
+                  <div className="p-4 sm:p-5 md:p-6">
+                    <ResumeMainSection title="Professional Summary">
+                      <p className="text-sm leading-7 text-slate-700">{summary}</p>
+                    </ResumeMainSection>
 
-                  <ResumeMainSection title="Experience">
-                    <div className="space-y-5">
-                      {experiences.map((experience) => (
-                        <div
-                          key={`${experience.role}-${experience.company}`}
-                          className="rounded-[1.5rem] border border-slate-200 bg-slate-50/80 p-4"
-                        >
-                          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                            <div>
-                              <h4 className="text-lg font-black text-slate-950">
-                                {experience.role}
-                              </h4>
-                              <p className="font-semibold text-cyan-700">
-                                {experience.company}
+                    <ResumeMainSection title="Work Experience">
+                      <div className="space-y-5">
+                        {experiences.map((experience) => (
+                          <article key={`${experience.role}-${experience.company}`}>
+                            <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                              <div>
+                                <h4 className="text-sm font-black text-slate-950 sm:text-base">
+                                  {experience.role}
+                                </h4>
+                                <p className="text-sm font-bold text-cyan-700">
+                                  {experience.company}
+                                </p>
+                              </div>
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                                {experience.duration}
                               </p>
                             </div>
-                            <p className="text-sm font-semibold text-slate-500">
-                              {experience.duration}
+                            <ul className="mt-2 space-y-1.5 pl-5 text-sm leading-6 text-slate-700">
+                              {experience.points.map((point) => (
+                                <li key={point} className="list-disc">
+                                  {point}
+                                </li>
+                              ))}
+                            </ul>
+                          </article>
+                        ))}
+                      </div>
+                    </ResumeMainSection>
+
+                    <ResumeMainSection title="Projects">
+                      <div className="space-y-5">
+                        {projects.map((project) => (
+                          <article key={project.title}>
+                            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                              <div>
+                                <h4 className="text-sm font-black text-slate-950 sm:text-base">
+                                  {project.title}
+                                </h4>
+                                <p className="text-sm font-bold text-cyan-700">
+                                  {project.type}
+                                </p>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                <ResumeActionLink href={project.live} icon={<FaGlobe />} label="Live" />
+                                <ResumeActionLink href={project.github} icon={<FaGithub />} label="GitHub" />
+                              </div>
+                            </div>
+                            <p className="mt-2 text-sm leading-6 text-slate-700">
+                              {project.description}
                             </p>
-                          </div>
-                          <ul className="mt-3 space-y-2 pl-5 text-sm leading-7 text-slate-700">
-                            {experience.points.map((point) => (
-                              <li key={point} className="list-disc">
-                                {point}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </ResumeMainSection>
-
-                  <ResumeMainSection title="Projects">
-                    <div className="space-y-5">
-                      {projects.map((project) => (
-                        <div
-                          key={project.title}
-                          className="rounded-[1.5rem] border border-slate-200 bg-slate-50/80 p-4"
-                        >
-                          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                            <div>
-                              <h4 className="text-lg font-black text-slate-950">
-                                {project.title}
-                              </h4>
-                              <p className="font-semibold text-cyan-700">
-                                {project.type}
-                              </p>
-                            </div>
-                            <p className="text-sm font-semibold text-slate-500">
-                              {project.tech.join(", ")}
+                            <ul className="mt-2 space-y-1.5 pl-5 text-sm leading-6 text-slate-700">
+                              {project.points.map((point) => (
+                                <li key={point} className="list-disc">
+                                  {point}
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                              Tech: {project.tech.join(", ")}
                             </p>
-                          </div>
-                          <p className="mt-3 text-sm leading-7 text-slate-700">
-                            {project.description}
-                          </p>
-                          <ul className="mt-3 space-y-2 pl-5 text-sm leading-7 text-slate-700">
-                            {project.points.map((point) => (
-                              <li key={point} className="list-disc">
-                                {point}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </ResumeMainSection>
-
-                  <ResumeMainSection title="Education">
-                    <div className="space-y-4">
-                      {education.map((item) => (
-                        <div
-                          key={`${item.degree}-${item.institute}`}
-                          className="rounded-[1.5rem] border border-slate-200 bg-slate-50/80 p-4"
-                        >
-                          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                            <div>
-                              <h4 className="text-lg font-black text-slate-950">
-                                {item.degree}
-                              </h4>
-                              <p className="font-semibold text-cyan-700">
-                                {item.institute}
-                              </p>
-                              <p className="text-sm text-slate-600">{item.board}</p>
-                            </div>
-                            <div className="text-sm font-semibold text-slate-500">
-                              <p>{item.duration}</p>
-                              {item.status ? <p>{item.status}</p> : null}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </ResumeMainSection>
+                          </article>
+                        ))}
+                      </div>
+                    </ResumeMainSection>
+                  </div>
                 </div>
               </div>
             </div>
@@ -203,11 +205,11 @@ export default function Resume() {
 
 function ResumeSidebarSection({ title, children }) {
   return (
-    <section className="mt-6">
-      <h3 className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">
+    <section className="mt-5 first:mt-0">
+      <h3 className="border-b border-cyan-500 pb-2 text-[11px] font-black uppercase tracking-[0.32em] text-slate-700">
         {title}
       </h3>
-      <div className="mt-3 space-y-3">{children}</div>
+      <div className="mt-3 space-y-4">{children}</div>
     </section>
   );
 }
@@ -215,7 +217,7 @@ function ResumeSidebarSection({ title, children }) {
 function ResumeMainSection({ title, children }) {
   return (
     <section className="mt-6 first:mt-0">
-      <h3 className="border-l-4 border-cyan-500 pl-3 text-lg font-black uppercase tracking-[0.18em] text-slate-950">
+      <h3 className="border-b border-cyan-500 pb-2 text-[11px] font-black uppercase tracking-[0.32em] text-slate-700">
         {title}
       </h3>
       <div className="mt-4">{children}</div>
@@ -223,6 +225,29 @@ function ResumeMainSection({ title, children }) {
   );
 }
 
-function SidebarLine({ children }) {
-  return <p className="text-sm leading-6 text-slate-700">{children}</p>;
+function ResumeHeaderLink({ href, children, external = false }) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="transition hover:text-cyan-200"
+    >
+      {children}
+    </a>
+  );
+}
+
+function ResumeActionLink({ href, icon, label }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-1 rounded-full border border-cyan-200 px-2.5 py-1 text-[11px] font-bold text-cyan-700 transition hover:bg-cyan-50"
+    >
+      {icon}
+      {label}
+    </a>
+  );
 }

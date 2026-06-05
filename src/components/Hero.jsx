@@ -45,9 +45,9 @@ export default function Hero() {
           </div>
 
           <div className="mt-6 flex gap-5 text-2xl md:mt-8">
-            <a href={personalInfo.github} target="_blank" className="hover:text-cyan-400"><FaGithub /></a>
-            <a href={personalInfo.linkedin} target="_blank" className="hover:text-cyan-400"><FaLinkedin /></a>
-            <a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" className="hover:text-cyan-400"><FaWhatsapp /></a>
+            <a href={personalInfo.github} target="_blank" rel="noreferrer" className="hover:text-cyan-400"><FaGithub /></a>
+            <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="hover:text-cyan-400"><FaLinkedin /></a>
+            <a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-cyan-400"><FaWhatsapp /></a>
             <a href={emailComposeLink} target="_blank" rel="noreferrer" className="hover:text-cyan-400"><MdEmail /></a>
           </div>
         </motion.div>

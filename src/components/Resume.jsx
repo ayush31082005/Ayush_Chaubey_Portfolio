@@ -2,6 +2,13 @@ import { personalInfo } from "../data/portfolioData";
 import { FaDownload, FaExternalLinkAlt, FaFileAlt } from "react-icons/fa";
 
 export default function Resume() {
+  const resumeUrl =
+    typeof window === "undefined"
+      ? personalInfo.resume
+      : new URL(personalInfo.resume, window.location.origin).href;
+
+  const mobilePreviewUrl = `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(resumeUrl)}`;
+
   return (
     <section id="resume" className="px-5 py-10 md:py-12 bg-[#151e2e]">
       <div className="max-w-6xl mx-auto text-center">
@@ -28,21 +35,24 @@ export default function Resume() {
           />
         </div>
 
-        <div className="mx-auto mt-8 max-w-4xl rounded-[2rem] border border-slate-700 bg-slate-950/45 p-6 text-left shadow-[0_20px_80px_rgba(2,12,27,0.35)] md:hidden">
-          <div className="rounded-[1.5rem] border border-slate-800 bg-slate-900/90 p-6">
-            <div className="flex items-start gap-4">
-              <div className="rounded-2xl bg-cyan-400/10 p-4 text-cyan-300">
-                <FaFileAlt className="text-3xl" />
-              </div>
+        <div className="mx-auto mt-8 max-w-4xl rounded-[2rem] border border-slate-700 bg-slate-950/45 p-3 text-left shadow-[0_20px_80px_rgba(2,12,27,0.35)] md:hidden">
+          <div className="overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-900/90">
+            <div className="flex items-center gap-3 border-b border-slate-800 px-4 py-4 text-cyan-300">
+              <FaFileAlt className="text-2xl" />
               <div>
-                <h3 className="text-xl font-black text-white">Resume Preview on Mobile</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-300">
-                  Some mobile browsers do not render PDF files inside the page. Use the buttons below to open the resume directly or download it without the blank preview issue.
-                </p>
+                <h3 className="text-lg font-black text-white">Resume Preview</h3>
+                <p className="text-sm text-slate-400">Mobile-friendly document viewer</p>
               </div>
             </div>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <iframe
+              src={mobilePreviewUrl}
+              title="Ayush resume mobile preview"
+              loading="lazy"
+              className="h-[540px] w-full bg-white"
+            />
+
+            <div className="flex flex-col gap-3 p-4">
               <a
                 href={personalInfo.resume}
                 target="_blank"

@@ -1,7 +1,9 @@
 import {
+  certifications,
   education,
   experiences,
   personalInfo,
+  projects,
   skills,
   summary,
 } from "../data/portfolioData";
@@ -31,7 +33,7 @@ export default function Resume() {
           </a>
           <a
             href={personalInfo.resume}
-            download="Ayush Chaubey Resume.pdf"
+            download={personalInfo.resumeDownloadName}
             className="inline-flex items-center justify-center gap-3 rounded-full border border-cyan-400 px-8 py-4 font-black text-cyan-300 hover:bg-cyan-400 hover:text-slate-950"
           >
             <FaDownload /> Download Resume
@@ -101,6 +103,43 @@ export default function Resume() {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  ))}
+                </div>
+              </ResumeSection>
+
+              <ResumeSection title="Projects">
+                <div className="space-y-5">
+                  {projects.map((project) => (
+                    <div key={project.title} className="rounded-2xl border border-slate-200 p-4">
+                      <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <h4 className="text-lg font-black text-slate-950">
+                            {project.title}
+                          </h4>
+                          <p className="font-semibold text-cyan-700">
+                            {project.type}
+                          </p>
+                        </div>
+                        <p className="text-sm font-semibold text-slate-500">
+                          {project.tech.join(", ")}
+                        </p>
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-slate-700">
+                        {project.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </ResumeSection>
+
+              <ResumeSection title="Certifications">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {certifications.map((certification) => (
+                    <div key={certification} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                      <p className="text-sm font-semibold leading-7 text-slate-700">
+                        {certification}
+                      </p>
                     </div>
                   ))}
                 </div>

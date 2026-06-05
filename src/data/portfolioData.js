@@ -7,7 +7,8 @@ export const personalInfo = {
   github: "https://github.com/ayush31082005",
   linkedin: "https://linkedin.com/in/ayush-chaubey-37237a39b",
   whatsapp: "918423573070",
-  resume: "/resume.pdf",
+  resume: "/Ayush%20Chaubey%20Resume.pdf",
+  resumeDownloadName: "Ayush Chaubey Resume.pdf",
 };
 
 export const summary = `Detail-oriented MERN Full Stack Developer with hands-on experience in both frontend and backend development. I have worked on real-world projects using React.js, Node.js, Express.js, and MongoDB, and I am skilled in RESTful APIs, JWT authentication, CRUD operations, database management, deployment, and third-party API integrations.`;
@@ -93,11 +94,11 @@ export const projects = [
 
 export const certifications = [
   "MERN Stack Developer",
-  "Full Stack Web Development (MERN Stack) – GRAStech 2026",
-  "Summer Training in PHP with MVC – Oct 2024",
-  "Web Designing – Feb 2024",
-  "Core Java Certification – Jun 2024",
-  "C Language Certification – Dec 2024",
+  "Full Stack Web Development (MERN Stack) - GRAStech 2026",
+  "Summer Training in PHP with MVC - Oct 2024",
+  "Web Designing - Feb 2024",
+  "Core Java Certification - Jun 2024",
+  "C Language Certification - Dec 2024",
 ];
 
 export const education = [

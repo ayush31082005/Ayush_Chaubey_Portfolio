@@ -41,7 +41,7 @@ export default function Hero() {
             >
               View Projects
             </button>
-            <a href={personalInfo.resume} download="Ayush Chaubey Resume.pdf" className="border border-cyan-400 text-cyan-400 px-7 py-3 rounded-full font-bold hover:bg-cyan-400 hover:text-slate-950">Download Resume</a>
+            <a href={personalInfo.resume} download={personalInfo.resumeDownloadName} className="border border-cyan-400 text-cyan-400 px-7 py-3 rounded-full font-bold hover:bg-cyan-400 hover:text-slate-950">Download Resume</a>
           </div>
 
           <div className="mt-6 flex gap-5 text-2xl md:mt-8">

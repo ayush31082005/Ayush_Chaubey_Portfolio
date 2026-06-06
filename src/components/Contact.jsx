@@ -8,9 +8,12 @@ export default function Contact() {
     <section id="contact" className="px-5 py-10 md:py-12 bg-[#111827]">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="section-title">Contact <span className="gradient-text">Me</span></h2>
-        <p className="section-subtitle mx-auto mt-2">Have a project, job opportunity or collaboration? Let's connect.</p>
+        <p className="section-subtitle mx-auto mt-2">Looking to hire a full stack developer for a project, freelance role, internship, or full-time opportunity? Let's connect.</p>
 
         <div className="card mt-6">
+          <p className="mx-auto max-w-2xl text-slate-300">
+            I am available for MERN stack development, React front-end work, API integration, and complete web application projects.
+          </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href={emailComposeLink} target="_blank" rel="noreferrer" className="bg-cyan-400 text-slate-950 px-7 py-3 rounded-full font-bold flex items-center gap-2"><FaEnvelope /> Email</a>
             <a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noreferrer" className="border border-cyan-400 text-cyan-400 px-7 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-cyan-400 hover:text-slate-950"><FaWhatsapp /> WhatsApp</a>
